@@ -30,6 +30,17 @@ const isValidEmail = (email) => {
 
 // Add participant data
 router.post('/add', authenticateUser, (req, res) => {
+    /* #swagger.tags = ['Participants']
+       #swagger.security = [{ "BasicAuth": [] }]
+       #swagger.path = '/participants/add'
+       #swagger.description = 'Endpoint to add a new participant'
+       #swagger.parameters['obj'] = {
+           in: 'body',
+           description: 'Participant information',
+           required: true,
+           schema: { $ref: '#/definitions/Participant' }
+        }
+    */
     const { email, firstname, lastname, dob, work, home, status } = req.body;
     
     // Validate required fields
@@ -72,6 +83,11 @@ router.post('/add', authenticateUser, (req, res) => {
 
 // Get all participants data
 router.get('/', authenticateUser, (req, res) => {
+    /* #swagger.tags = ['Participants']
+       #swagger.security = [{ "BasicAuth": [] }]
+       #swagger.path = '/participants'
+       #swagger.description = 'Endpoint to retrieve all participants'
+    */
     const summary = {};
     for (const email in participants) {
         summary[email] = { status: participants[email].status };
@@ -81,6 +97,11 @@ router.get('/', authenticateUser, (req, res) => {
 
 // Get specific participant details
 router.get('/details', authenticateUser, (req, res) => {
+    /*  #swagger.tags = ['Participants']
+        #swagger.security = [{ "BasicAuth": [] }]
+        #swagger.path = '/participants/details'
+        #swagger.description = 'Endpoint to retrieve details of all active participants'
+    */
     const details = {};
     for (const email in participants) {
         if (participants[email].status === "active") {
@@ -97,6 +118,12 @@ router.get('/details', authenticateUser, (req, res) => {
 
 // Get specific participant details
 router.get('/details/:email', authenticateUser, (req, res) => {
+    //  #swagger.tags = ['Participants']
+    //  #swagger.security = [{ "BasicAuth": [] }]
+    /*
+        #swagger.path = '/participants/details/{email}'
+    */
+    //  #swagger.description = 'Endpoint to retrieve details of a specific active participant'
     const participant = participants[req.params.email];
     if (!participant || participant.status !== "active") {
         return res.status(404).json({ error: "Active participant not found" });
@@ -110,6 +137,13 @@ router.get('/details/:email', authenticateUser, (req, res) => {
 
 // Get specific participant work details
 router.get('/work/:email', authenticateUser, (req, res) => {
+    //  #swagger.tags = ['Participants']
+    //  #swagger.security = [{ "BasicAuth": [] }]
+    /*
+        #swagger.path = '/participants/work/{email}'
+    */    
+    //  #swagger.description = 'Endpoint to retrieve work details of a specific active participant'
+    
     const participant = participants[req.params.email];
     if (!participant || participant.status !== "active") {
         return res.status(404).json({ error: "Active participant not found" });
@@ -119,6 +153,13 @@ router.get('/work/:email', authenticateUser, (req, res) => {
 
 // Get specific participant home details
 router.get('/home/:email', authenticateUser, (req, res) => {
+    //  #swagger.tags = ['Participants']
+    //  #swagger.security = [{ "BasicAuth": [] }]
+    /*    
+        #swagger.path = '/participants/home/{email}'
+    */
+    //   #swagger.description = 'Endpoint to retrieve home details of a specific active participant'
+    
     const participant = participants[req.params.email];
     if (!participant || participant.status !== "active") {
         return res.status(404).json({ error: "Active participant not found" });
@@ -128,6 +169,19 @@ router.get('/home/:email', authenticateUser, (req, res) => {
 
 // Update specific participant details
 router.put('/:email', authenticateUser, (req, res) => {
+    //    #swagger.tags = ['Participants']
+    //    #swagger.security = [{ "BasicAuth": [] }]
+    /*    
+          #swagger.path = '/participants/{email}'
+    */
+    //    #swagger.description = 'Endpoint to update a specific participant'
+    /*    #swagger.parameters['obj'] = {
+           in: 'body',
+           description: 'Participant information',
+           required: true,
+           schema: { $ref: '#/definitions/Participant' }
+        }
+    */
     const email = req.params.email;  // Get the email from the URL parameter
     const participant = participants[email];
     
@@ -171,6 +225,13 @@ router.put('/:email', authenticateUser, (req, res) => {
 
 // Delete specific participant details
 router.delete('/:email', authenticateUser, (req, res) => {
+    //  #swagger.tags = ['Participants']
+    //  #swagger.security = [{ "BasicAuth": [] }]
+    /* 
+        #swagger.path = '/participants/{email}'
+    */
+    //    #swagger.description = 'Endpoint to delete (deactivate) a specific participant'
+    
     const participant = participants[req.params.email];
     if (!participant || participant.status === "deleted") {
         return res.status(404).json({ error: "Participant not found or already deleted" });

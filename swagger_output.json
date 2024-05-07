@@ -1,0 +1,339 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Census API",
+    "description": "API for managing census participants",
+    "version": "1.0.0"
+  },
+  "host": "ruben-kjaer-srv-ca-aug23ft.onrender.com",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Participants",
+      "description": "Endpoints related to participant operations"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "BasicAuth": {
+      "type": "basic",
+      "description": "Enter username and password to access this API"
+    }
+  },
+  "paths": {
+    "/participants/add": {
+      "post": {
+        "tags": [
+          "Participants"
+        ],
+        "description": "Endpoint to add a new participant",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Participant information",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Participant"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        },
+        "security": [
+          {
+            "BasicAuth": []
+          }
+        ]
+      }
+    },
+    "/participants": {
+      "get": {
+        "tags": [
+          "Participants"
+        ],
+        "description": "Endpoint to retrieve all participants",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "BasicAuth": []
+          }
+        ]
+      }
+    },
+    "/participants/details": {
+      "get": {
+        "tags": [
+          "Participants"
+        ],
+        "description": "Endpoint to retrieve details of all active participants",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "BasicAuth": []
+          }
+        ]
+      }
+    },
+    "/participants/details/{email}": {
+      "get": {
+        "tags": [
+          "Participants"
+        ],
+        "description": "Endpoint to retrieve details of a specific active participant",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BasicAuth": []
+          }
+        ]
+      }
+    },
+    "/participants/work/{email}": {
+      "get": {
+        "tags": [
+          "Participants"
+        ],
+        "description": "Endpoint to retrieve work details of a specific active participant",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BasicAuth": []
+          }
+        ]
+      }
+    },
+    "/participants/home/{email}": {
+      "get": {
+        "tags": [
+          "Participants"
+        ],
+        "description": "Endpoint to retrieve home details of a specific active participant",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BasicAuth": []
+          }
+        ]
+      }
+    },
+    "/participants/{email}": {
+      "put": {
+        "tags": [
+          "Participants"
+        ],
+        "description": "Endpoint to update a specific participant",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "description": "Participant information",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Participant"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BasicAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Participants"
+        ],
+        "description": "Endpoint to delete (deactivate) a specific participant",
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BasicAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Participant": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "john.doe@example.com"
+        },
+        "firstname": {
+          "type": "string",
+          "example": "John"
+        },
+        "lastname": {
+          "type": "string",
+          "example": "Doe"
+        },
+        "dob": {
+          "type": "string",
+          "example": "1980-01-01"
+        },
+        "work": {
+          "type": "object",
+          "properties": {
+            "companyname": {
+              "type": "string",
+              "example": "Tech Solutions"
+            },
+            "salary": {
+              "type": "number",
+              "example": 55000
+            },
+            "currency": {
+              "type": "string",
+              "example": "USD"
+            }
+          }
+        },
+        "home": {
+          "type": "object",
+          "properties": {
+            "country": {
+              "type": "string",
+              "example": "USA"
+            },
+            "city": {
+              "type": "string",
+              "example": "New York"
+            }
+          }
+        },
+        "status": {
+          "type": "string",
+          "example": "active"
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "BasicAuth": []
+    }
+  ]
+}
