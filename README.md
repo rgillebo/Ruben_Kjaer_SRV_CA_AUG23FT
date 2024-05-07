@@ -2,7 +2,7 @@
 A simple application for manually capturing participants details.
 
 ## TECHNOLOGIES USED
-- **Node.js:** JavaScript runtime used for server-side development. This app uses version "v20.10.0".
+- **Node.js:** JavaScript runtime used for server-side development. This app uses version "v20.12.2".
 - **Swagger:** Used for creating dynamic API documentation that can be interacted with in the browser. 
 - **Express:** Web framework for building the server and handling routes.
 - **dotenv:** For managing environment variables.
