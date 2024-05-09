@@ -22,6 +22,8 @@ A simple application for manually capturing participants details.
 ### Deployment
 The application is hosted on Render. Access the API here: [https://ruben-kjaer-srv-ca-aug23ft.onrender.com](https://ruben-kjaer-srv-ca-aug23ft.onrender.com/participants)
 
+**Please Note** - "Your free instance will spin down with inactivity, which can delay requests by 50 seconds or more." Meaning on first load, please be patient for the server to activate. 
+
 ### Testing & API Documentation 
 
 **API Documentation** and **testing** can be found by visiting: [https://ruben-kjaer-srv-ca-aug23ft.onrender.com/docs/](https://ruben-kjaer-srv-ca-aug23ft.onrender.com/docs/)
